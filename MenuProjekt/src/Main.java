@@ -78,8 +78,50 @@ public class Main extends JFrame{
 
         JDialog dialog = new JDialog(frame, "Add Dish");
         JPanel pnlDish = new JPanel();
+        JLabel lblDish = new JLabel("Dish Configuration");
 
-        dialog.setSize(300, 300);
+        JPanel pnlMainContent = new JPanel();
+        JPanel pnlContent = new JPanel();
+        MyLine lineUp = new MyLine();
+        MyLine lineDown = new MyLine();
+        //TODO: add main content to pnlContent
+
+        JPanel pnlButtons = new JPanel();
+        JButton btnSave = new JButton("Save");
+        JButton btnCancel = new JButton("Cancel");
+
+        pnlDish.setLayout(new FlowLayout());
+        pnlMainContent.setLayout(new BorderLayout());
+
+        pnlDish.add(lblDish);
+        pnlDish.setBounds(1,1,1,1);
+
+        pnlMainContent.add(lineUp, BorderLayout.NORTH);
+        pnlMainContent.add(pnlContent, BorderLayout.CENTER);
+        pnlMainContent.add(lineDown, BorderLayout.SOUTH);
+
+        pnlButtons.add(btnSave, BorderLayout.WEST);
+        pnlButtons.add(btnCancel, BorderLayout.EAST);
+
+        dialog.add(pnlDish, BorderLayout.NORTH);
+        dialog.add(pnlMainContent, BorderLayout.CENTER);
+        dialog.add(pnlButtons, BorderLayout.SOUTH);
+
+        btnSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO:Save input
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+            }
+        });
+
+        dialog.setSize(400, 400);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
