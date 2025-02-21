@@ -47,11 +47,7 @@ public class Main extends JFrame{
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                JDialog dialog = new JDialog(frame, "Add Dish");
-                dialog.setSize(300, 300);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
+                createDialog(frame);
             }
         });
 
@@ -78,18 +74,22 @@ public class Main extends JFrame{
 
     }
 
+    private void createDialog(Frame frame) {
 
+        JDialog dialog = new JDialog(frame, "Add Dish");
+        JPanel pnlDish = new JPanel();
 
-    public class MyLine extends JPanel
+        dialog.setSize(300, 300);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    private class MyLine extends JPanel
     {
         @Override public void paint(Graphics g)
         {
-            //Get the current size of this component
             Dimension d = this.getSize();
-
-            //draw in black
             g.setColor(Color.BLACK);
-            //draw a centered horizontal line
             g.drawLine(0,d.height,d.width,d.height);
         }
     }
