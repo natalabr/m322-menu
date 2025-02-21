@@ -1,7 +1,5 @@
-import model.Category;
-import model.DietaryRestrictions;
-import model.Dish;
-import model.DishModel;
+import Model.Dish;
+import Model.DishModel;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -9,7 +7,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.format.DateTimeFormatter;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -41,8 +38,6 @@ public class Main extends JFrame{
         //JPanel pnlButtonsLeft = new JPanel();
         JPanel pnlButtonsRight = new JPanel();
         JPanel pnlAllButtons = new JPanel();
-//        JButton btnLeft = new JButton("<");
-//        JButton btnRight = new JButton(">");
         JButton btnAdd = new JButton("Add");
         JButton btnEdit = new JButton("Edit");
         JButton btnDelete = new JButton("Delete");
@@ -53,14 +48,11 @@ public class Main extends JFrame{
         pnlMain.setLayout(new BorderLayout());
         pnlDish.setLayout(new FlowLayout());
         pnlMainContent.setLayout(new BorderLayout());
-//        pnlButtonsLeft.setLayout(new BorderLayout());
-//        pnlButtonsLeft.setLayout(new BorderLayout());
-
         pnlDish.add(lblDish);
         pnlDish.setBounds(1,1,1,1);
 
         pnlMainContent.add(lineUp, BorderLayout.NORTH);
-        //TODO: add list or name
+        //TODO: add list
         pnlMainContent.add(lineDown, BorderLayout.SOUTH);
 
         dishJList.addListSelectionListener(new ListSelectionListener() {
@@ -96,14 +88,10 @@ public class Main extends JFrame{
             }
         });
 
-//        pnlButtonsLeft.add(btnLeft, BorderLayout.WEST);
-//        pnlButtonsLeft.add(btnRight, BorderLayout.EAST);
-
         pnlButtonsRight.add(btnAdd, BorderLayout.WEST);
         pnlButtonsRight.add(btnEdit, BorderLayout.CENTER);
         pnlButtonsRight.add(btnDelete, BorderLayout.EAST);
 
-        //pnlAllButtons.add(pnlButtonsLeft, BorderLayout.WEST);
         pnlAllButtons.add(pnlButtonsRight, BorderLayout.CENTER);
 
         pnlMain.add(pnlDish, BorderLayout.NORTH);

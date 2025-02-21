@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 public class Dish {
 
@@ -18,5 +18,7 @@ public class Dish {
         this.spicinessRating = spicinessRating;
     }
 
-
+    public String toString() {
+        return dishname + " " + price;
+    }
 }
