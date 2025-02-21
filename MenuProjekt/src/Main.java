@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main extends JFrame{
 
@@ -42,6 +44,17 @@ public class Main extends JFrame{
         //TODO: add list or name
         pnlMainContent.add(lineDown, BorderLayout.SOUTH);
 
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JDialog dialog = new JDialog(frame, "Add Dish");
+                dialog.setSize(300, 300);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+
         pnlButtonsLeft.add(btnLeft, BorderLayout.WEST);
         pnlButtonsLeft.add(btnRight, BorderLayout.EAST);
 
@@ -65,7 +78,7 @@ public class Main extends JFrame{
 
     }
 
-    
+
 
     public class MyLine extends JPanel
     {
