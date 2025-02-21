@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DishController {
 
-    private Model.DishModel dishModel;
+    private DishModel dishModel;
 
     public DishController() {
         dishModel = new Model.DishModel();
@@ -30,9 +30,7 @@ public class DishController {
         dishModel.deleteDish(index);
     }
 
-    public List<Model.Dish> getDishes() {
+    public List<Dish> getDishes() {
         return dishModel.getDishes();
     }
-    
-
 }

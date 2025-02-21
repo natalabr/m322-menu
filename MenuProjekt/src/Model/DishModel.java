@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DishModel {
+
     List<Dish> dishes;
 
     public DishModel() {
         dishes = new ArrayList<Dish>();
-    }
-
-    public void loadDishes() {
-        dishes = getDefaultDishes();
     }
 
     public void addDish(Dish dish) {
@@ -21,12 +18,12 @@ public class DishModel {
     public Dish getDish(int index) {
         var d = dishes.get(index);
         var temp = new Dish(
-                d.name,
-                d.ingredients,
-                d.category,
-                d.price,
-                d.dietaryRestrictions,
-                d.spicinessRating);
+                d.getName(),
+                d.getIngredients(),
+                d.getCategory(),
+                d.getPrice(),
+                d.getDietaryRestrictions(),
+                d.getSpicinessRating());
         return temp;
     }
 
@@ -44,6 +41,10 @@ public class DishModel {
             temp.add(dish);
         }
         return temp;
+    }
+
+    public void loadDishes() {
+        dishes = getDefaultDishes();
     }
 
     public void loadEmployees() {
@@ -97,6 +98,6 @@ public class DishModel {
         defaultDishes.add(brownie);
         defaultDishes.add(bruschetta);
 
-        return getDefaultDishes();
+        return defaultDishes;
     }
 }
