@@ -2,15 +2,15 @@ package Model;
 
 public class Dish {
 
-    String dishname;
+    String name;
     String ingredients;
     Category category;
     String price;
     DietaryRestrictions dietaryRestrictions;
     int spicinessRating;
 
-    public Dish(String dishname, String ingredients, Category category, String price, DietaryRestrictions dietaryRestrictions, int spicinessRating) {
-        this.dishname = dishname;
+    public Dish(String name, String ingredients, Category category, String price, DietaryRestrictions dietaryRestrictions, int spicinessRating) {
+        this.name = name;
         this.ingredients = ingredients;
         this.category = category;
         this.price = price;
@@ -19,6 +19,6 @@ public class Dish {
     }
 
     public String toString() {
-        return dishname + " " + price;
+        return name + " " + price;
     }
 }

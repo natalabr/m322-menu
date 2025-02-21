@@ -14,6 +14,42 @@ public class DishModel {
         dishes = getDefaultDishes();
     }
 
+    public void addDish(Dish dish) {
+        dishes.add(dish);
+    }
+
+    public Dish getDish(int index) {
+        var d = dishes.get(index);
+        var temp = new Dish(
+                d.name,
+                d.ingredients,
+                d.category,
+                d.price,
+                d.dietaryRestrictions,
+                d.spicinessRating);
+        return temp;
+    }
+
+    public void updateDish(int index, Dish dish) {
+        dishes.set(index, dish);
+    }
+
+    public void deleteDish(int index) {
+        dishes.remove(index);
+    }
+
+    public List<Dish> getDishes() {
+        List<Dish> temp = new ArrayList<>();
+        for (Dish dish : dishes) {
+            temp.add(dish);
+        }
+        return temp;
+    }
+
+    public void loadEmployees() {
+        dishes = getDefaultDishes();
+    }
+
     public List<Dish> getDefaultDishes() {
 
         List<Dish> defaultDishes = new ArrayList<>();

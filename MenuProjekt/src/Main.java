@@ -26,7 +26,7 @@ public class Main extends JFrame{
         JPanel pnlMain = new JPanel();
 
         JPanel pnlDish = new JPanel();
-        JLabel lblDish = new JLabel("Dish");
+        JLabel lblDish = new JLabel("Dishes");
 
         JPanel pnlMainContent = new JPanel();
         MyLine lineUp = new MyLine();
