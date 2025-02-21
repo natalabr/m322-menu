@@ -10,6 +10,10 @@ public class DishModel {
         dishes = new ArrayList<Dish>();
     }
 
+    public void loadDishes() {
+        dishes = getDefaultDishes();
+    }
+
     public List<Dish> getDefaultDishes() {
 
         List<Dish> defaultDishes = new ArrayList<>();
@@ -58,7 +62,5 @@ public class DishModel {
         defaultDishes.add(bruschetta);
 
         return getDefaultDishes();
-
-
     }
 }

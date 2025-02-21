@@ -1,7 +1,17 @@
+import model.Category;
+import model.DietaryRestrictions;
+import model.Dish;
+import model.DishModel;
+
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
+
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Main extends JFrame{
 
@@ -9,6 +19,9 @@ public class Main extends JFrame{
 
         new Main();
     }
+
+    private DishModel dishModel;
+    private DefaultListModel dishListModel;
 
     private Main() {
 
@@ -20,22 +33,28 @@ public class Main extends JFrame{
 
         JPanel pnlMainContent = new JPanel();
         MyLine lineUp = new MyLine();
+        JList<Dish> dishJList = new JList<>();
+        dishListModel = new DefaultListModel<>();
+        dishJList.setModel(dishListModel);
         MyLine lineDown = new MyLine();
 
-        JPanel pnlButtonsLeft = new JPanel();
+        //JPanel pnlButtonsLeft = new JPanel();
         JPanel pnlButtonsRight = new JPanel();
         JPanel pnlAllButtons = new JPanel();
-        JButton btnLeft = new JButton("<");
-        JButton btnRight = new JButton(">");
+//        JButton btnLeft = new JButton("<");
+//        JButton btnRight = new JButton(">");
         JButton btnAdd = new JButton("Add");
         JButton btnEdit = new JButton("Edit");
         JButton btnDelete = new JButton("Delete");
 
+        btnEdit.setEnabled(false);
+        btnDelete.setEnabled(false);
+
         pnlMain.setLayout(new BorderLayout());
         pnlDish.setLayout(new FlowLayout());
         pnlMainContent.setLayout(new BorderLayout());
-        pnlButtonsLeft.setLayout(new BorderLayout());
-        pnlButtonsLeft.setLayout(new BorderLayout());
+//        pnlButtonsLeft.setLayout(new BorderLayout());
+//        pnlButtonsLeft.setLayout(new BorderLayout());
 
         pnlDish.add(lblDish);
         pnlDish.setBounds(1,1,1,1);
@@ -44,6 +63,18 @@ public class Main extends JFrame{
         //TODO: add list or name
         pnlMainContent.add(lineDown, BorderLayout.SOUTH);
 
+        dishJList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedDishIndex = dishJList.getSelectedIndex();
+
+                if(selectedDishIndex >= 0) {
+                    btnEdit.setEnabled(true);
+                    btnDelete.setEnabled(true);
+                }
+            }
+        });
+
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,15 +82,29 @@ public class Main extends JFrame{
             }
         });
 
-        pnlButtonsLeft.add(btnLeft, BorderLayout.WEST);
-        pnlButtonsLeft.add(btnRight, BorderLayout.EAST);
+        btnEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createDialog(frame);
+            }
+        });
+
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO:delete function
+            }
+        });
+
+//        pnlButtonsLeft.add(btnLeft, BorderLayout.WEST);
+//        pnlButtonsLeft.add(btnRight, BorderLayout.EAST);
 
         pnlButtonsRight.add(btnAdd, BorderLayout.WEST);
         pnlButtonsRight.add(btnEdit, BorderLayout.CENTER);
         pnlButtonsRight.add(btnDelete, BorderLayout.EAST);
 
-        pnlAllButtons.add(pnlButtonsLeft, BorderLayout.WEST);
-        pnlAllButtons.add(pnlButtonsRight, BorderLayout.EAST);
+        //pnlAllButtons.add(pnlButtonsLeft, BorderLayout.WEST);
+        pnlAllButtons.add(pnlButtonsRight, BorderLayout.CENTER);
 
         pnlMain.add(pnlDish, BorderLayout.NORTH);
         pnlMain.add(pnlMainContent, BorderLayout.CENTER);
@@ -84,7 +129,77 @@ public class Main extends JFrame{
         JPanel pnlContent = new JPanel();
         MyLine lineUp = new MyLine();
         MyLine lineDown = new MyLine();
-        //TODO: add main content to pnlContent
+        JLabel lblName = new JLabel(" Name:");
+        JTextField txtName = new JTextField();
+        JPanel pnlName = new JPanel();
+        JLabel lblIngredients = new JLabel(" Ingredients:");
+        JTextArea txtIngridients = new JTextArea();
+        JPanel pnlIngredients = new JPanel();
+        JLabel lblCategory = new JLabel(" Category:");
+        JRadioButton rdbtnAppetizer = new JRadioButton(" Appetizer");
+        JRadioButton rdbtnMainDish = new JRadioButton(" Main Dish");
+        JRadioButton rdbtnDessert = new JRadioButton(" Dessert");
+        ButtonGroup btnGroup = new ButtonGroup();
+        JPanel pnlCategoryOptions = new JPanel();
+        JPanel pnlCategory = new JPanel();
+        JLabel lblPrice = new JLabel(" Price:");
+        JTextField txtPrice = new JTextField();
+        JPanel pnlPrice = new JPanel();
+        JLabel lblDietaryRestrictions = new JLabel(" Dietary Restrictions:");
+        JCheckBox cbDietaryRestrictionsVegan = new JCheckBox("Vegan");
+        JCheckBox cbDietaryRestrictionsGlutenFree = new JCheckBox("No-Gluten");
+        JCheckBox cbDietaryRestrictionsVegetarian = new JCheckBox("Vege");
+        JPanel pnlDietaryRestrictionsOptions = new JPanel();
+        JPanel pnlDietaryRestrictions = new JPanel();
+        JLabel lblSpicinessRating = new JLabel(" Spiciness Rating 1-10:");
+        JSpinner spinnerSpicinessRating = new JSpinner();
+        JPanel pnlSpicinessRating = new JPanel();
+
+        pnlName.setLayout(new GridLayout(1,2));
+        pnlName.add(lblName);
+        pnlName.add(txtName);
+
+        pnlIngredients.setLayout(new GridLayout(1,2));
+        pnlIngredients.add(lblIngredients);
+        pnlIngredients.add(txtIngridients);
+
+        btnGroup.add(rdbtnAppetizer);
+        btnGroup.add(rdbtnMainDish);
+        btnGroup.add(rdbtnDessert);
+
+        pnlCategoryOptions.setLayout(new GridLayout(1,3));
+        pnlCategoryOptions.add(rdbtnAppetizer);
+        pnlCategoryOptions.add(rdbtnMainDish);
+        pnlCategoryOptions.add(rdbtnDessert);
+
+        pnlCategory.setLayout(new BorderLayout());
+        pnlCategory.add(lblCategory, BorderLayout.WEST);
+        pnlCategory.add(pnlCategoryOptions, BorderLayout.EAST);
+
+        pnlPrice.setLayout(new GridLayout(1,2));
+        pnlPrice.add(lblPrice);
+        pnlPrice.add(txtPrice);
+
+        pnlDietaryRestrictionsOptions.setLayout(new GridLayout(1,3));
+        pnlDietaryRestrictionsOptions.add(cbDietaryRestrictionsVegan);
+        pnlDietaryRestrictionsOptions.add(cbDietaryRestrictionsGlutenFree);
+        pnlDietaryRestrictionsOptions.add(cbDietaryRestrictionsVegetarian);
+
+        pnlDietaryRestrictions.setLayout(new BorderLayout());
+        pnlDietaryRestrictions.add(lblDietaryRestrictions, BorderLayout.WEST);
+        pnlDietaryRestrictions.add(pnlDietaryRestrictionsOptions, BorderLayout.EAST);
+
+        pnlSpicinessRating.setLayout(new GridLayout(1,2));
+        pnlSpicinessRating.add(lblSpicinessRating);
+        pnlSpicinessRating.add(spinnerSpicinessRating);
+
+        pnlContent.setLayout(new GridLayout(6,1));
+        pnlContent.add(pnlName);
+        pnlContent.add(pnlIngredients);
+        pnlContent.add(pnlCategory);
+        pnlContent.add(pnlPrice);
+        pnlContent.add(pnlDietaryRestrictions);
+        pnlContent.add(pnlSpicinessRating);
 
         JPanel pnlButtons = new JPanel();
         JButton btnSave = new JButton("Save");
@@ -110,7 +225,11 @@ public class Main extends JFrame{
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO:Save input
+
+                int spicinessRating = Integer.parseInt(spinnerSpicinessRating.getValue().toString());
+                if (spicinessRating > 10 || spicinessRating < 0) {
+                    invalidInput(dialog);
+                }
             }
         });
 
@@ -121,9 +240,13 @@ public class Main extends JFrame{
             }
         });
 
-        dialog.setSize(400, 400);
+        dialog.setSize(550, 250);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+    }
+
+    private void invalidInput(Dialog dialog) {
+        showMessageDialog(dialog, "Invalid Input", "", JOptionPane.ERROR_MESSAGE);
     }
 
     private class MyLine extends JPanel
