@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Dish;
+import Model.DishModel;
+
 import java.util.List;
 
 public class DishController {
@@ -11,11 +14,11 @@ public class DishController {
         dishModel.loadDishes();
     }
 
-    public void addDish(Model.DishModel dish) {
+    public void addDish(Dish dish) {
         dishModel.addDish(dish);
     }
 
-    public void updateDish(int index, Model.DishModel dish) {
+    public void updateDish(int index, Dish dish) {
         dishModel.updateDish(index, dish);
     }
 
